@@ -8,19 +8,21 @@ SET - II (Even Roll Nos.)
 Create an Order_Master database and also create the following tables with appropriate constraints and input at least 20 records in Order_Master table, 05 records in Product_master table, and 10 records in Salesman_master table.
 
 Table Name: Order_Master
-Field Name		Field Type	           Constraints
-Order_no		Number	           Primary Key
-Prod_no		Number		Foreign Key
-Qty			Number
+
+Field Name		Field Type	        Constraints
+Order_no		Number	            Primary Key
+Prod_no		    Number		        Foreign Key
+Qty			    Number
 Discount		Number
 Order_date		Date
-GST			Number 
+GST		    	Number 
 Payment_Type	Text			
 Total_Amount	Number		
 
 Table Name: Product_master
-Field Name		Field Type	           Constraints
-Product_no		Number	           Primary Key
+
+Field Name		Field Type	        Constraints
+Product_no		Number	            Primary Key
 Product_name	Text
 Description		Text
 Quantity		Number
@@ -28,16 +30,19 @@ Sell_Price		Number
 Cost_Price		Number
 
 Table Name: Salesman_master
-Field Name		Field Type	           Constraints
-Salesman_no		Number	           Primary Key
+
+Field Name		Field Type	        Constraints
+Salesman_no		Number	            Primary Key
 Salesman_name	Text
 City			Text
-Pincode		Number
+Pincode		    Number
 State			Text
 Salary			Number
-Remarks		Text
-Order_No		Number		Foreign Key
-Solve the following queries.
+Remarks		    Text
+Order_No		Number		        Foreign Key
+
+    *Solve the following queries.
+
     1. Display all the order with payment_type ‘UPI’.
     2. Display all salesman name from salesman_master table.
     3. Retrieve the list of name and city of all the salesmen.
