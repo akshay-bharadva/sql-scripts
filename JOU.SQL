@@ -145,13 +145,13 @@ VALUES(2024,'Dipika','Mumbai',395050,'Maharashtra',15000,'VERY TALL PERSON',1210
 INSERT INTO Salesman_Master 
 VALUES(3024,'Chirag','Navsari',399305,'Gujarat',10000,'VERY THIN PERSON',1211);
 INSERT INTO Salesman_Master 
-VALUES(4024,'Mihir','Udhna',394220,'Gujarat',2500,'VERY LONGLIVING PERSON',1212);
+VALUES(4024,'Mihir','Surat',394220,'Gujarat',2500,'VERY LONGLIVING PERSON',1212);
 INSERT INTO Salesman_Master 
-VALUES(5024,'Venky','Baroda',405010,'Gujarat',9500,'CHILDLIKE PERSON',1213);
+VALUES(5024,'Venky','Mumbai',405010,'Maharashtra',9500,'CHILDLIKE PERSON',1213);
 INSERT INTO Salesman_Master 
 VALUES(6024,'Bhavin','Kerla',505109,'Kerla',16350,'ACTIVE PERSON',1214);
 INSERT INTO Salesman_Master 
-VALUES(7024,'Ravi','Gandhinagar',390081,'Gujarat',1530,'VERY FAT PERSON',1215);
+VALUES(7024,'Ravi','Surat',390081,'Gujarat',1530,'VERY FAT PERSON',1215);
 INSERT INTO Salesman_Master 
 VALUES(8024,'Divyang','Jaipur',415263,'Rajasthan',1250,'VERY FUNNY PERSON',1216);
 INSERT INTO Salesman_Master 
@@ -169,22 +169,31 @@ REFERENCES Product_Master(Product_no);
 
 
 /*1.	Display all the order with payment_type ‘UPI’.*/
+SELECT * FROM Order_Master WHERE Payment_Type LIKE 'UPI';
 
 /*2.	Display all salesman name from salesman_master table.*/
+SELECT Salesman_name FROM Salesman_Master;
 
 /*3.	Retrieve the list of name and city of all the salesmen.*/
+SELECT Salesman_name,City FROM Salesman_Master;
 
 /*4.	List the various products available in product_master table.*/
+SELECT DISTINCT Product_name FROM Product_Master;
 
 /*5.	List all the salesmen who are located in Mumbai.*/
+SELECT * FROM Salesman_Master WHERE City LIKE 'MUMBAI';
 
 /*6.	List all the products whose sell_price is >= 1000 rupees.*/
+SELECT * FROM Product_Master WHERE Sell_Price >=1000;
 
 /*7.	Change the city of salesman ‘Akshay’ to ‘UNJHA’ in salesman_master table.*/
+UPDATE Salesman_Master SET City = 'UNJHA' WHERE Salesman_name LIKE 'AKSHAY';
 
 /*8.	Change the cost_price of monitor to 999.50 rupees.*/
+UPDATE Product_Master SET Cost_Price = 999.50 WHERE Product_name LIKE 'MONITOR';
 
 /*9.	Change the salary of ‘Dipika’ to 6500 rupees.*/
+UPDATE Salesman_Master SET Salary = 6500 WHERE Salesman_name LIKE 'DIPIKA';
 
 /*10.	Delete all salesman from salesman_master whose salaries are greater than 5000RS.*/
 
@@ -193,19 +202,25 @@ REFERENCES Product_Master(Product_no);
 /*12.	Delete from Order_master where order duration more than 6 months.*/
 
 /*13.	Add a column called ‘telephone’ of data type number and size 10 to the salesman_master table.*/
+ALTER TABLE Salesman_Master ADD COLUMN 'Telephone' INTEGER(10);
+
 
 /*14.	Change the size of sell_price column in product_master to (10,2).*/
+ALTER TABLE Product_Master ALTER COLUMN Sell_Price FLOAT(10.2);
 alter table alter column datatype[double](10,2);
 
 /*15.	Count the total number of salesmen working in surat city.*/
+SELECT * FROM Salesman_Master WHERE City LIKE 'SURAT';
 
 /*16.	Display the name of the product whose order placed maximum time.*/
 
 /*17.	Destroy the table Order_master along with its data.*/
+DROP TABLE Order_Master;
 
 /*18.	Display total GST collected on current date.*/
 
 /*19.	Display all products whose name are four characters long and starts with ‘a’.*/
+SELECT Product_name FROM Product_Master WHERE Product_name	LIKE 'A___'
 
 /*20.	Increase the price of products by 5% which has highest discount.*/
 
