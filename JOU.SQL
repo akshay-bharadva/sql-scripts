@@ -165,6 +165,10 @@ ALTER TABLE Product_Master ALTER COLUMN Sell_Price NUMERIC(10,2);
 SELECT * FROM Salesman_Master WHERE City LIKE 'SURAT';
 
 /*16.	Display the name of the product whose order placed maximum time.*/
+SELECT Product_name FROM Product_Master WHERE Product_no IN
+	( SELECT Prod_no FROM Order_Master GROUP BY Prod_no HAVING count(*) = 
+	 	(SELECT COUNT(*) FROM Order_Master GROUP BY Prod_no ORDER BY COUNT(*) DESC LIMIT 1)
+	);
 --SIR WILL TELL
 -- THIS IS MINE HOGPOJ /**/ SELECT PRODUCT_NAME FROM PRODUCT_MASTER WHERE PRODUCT_NO = (SELECT MAX(COUNT(PROD_NO)) FROM ORDER_MASTER )--WHERE PROD_NO = MAX(COUNT(PROD_NO)) )
 
@@ -175,14 +179,19 @@ DROP TABLE Order_Master;
 SELECT SUM(GST) FROM ORDER_MASTER  WHERE ORDER_DATE = CURRENT_DATE;
 
 /*19.	Display all products whose name are four characters long and starts with ‘a’.*/
-SELECT Product_name FROM Product_Master WHERE Product_name	LIKE 'A___'
+SELECT Product_name FROM Product_Master WHERE Product_name LIKE 'A___'
 
 /*20.	Increase the price of products by 5% which has highest discount.*/
+UPDATE Order_Master SET Total_Amount = Total_Amount + ( Total_Amount * 0.05 ) 
+WHERE Discount =( SELECT max(Discount) FROM Order_Master );
 --SIR WILL TELL
 
 /*21.	Display all the products sold today.*/
+SELECT Product_name FROM Product_Master WHERE Product_no = 
+	(SELECT Prod_no FROM Order_Master WHERE Order_date = CURRENT_DATE);
 
 /*22.	Display total stock of all the product.*/
+SELECT SUM(Quantity) AS TOTAL_STOCK FROM Product_Master;
 
 /*23.	Update GST for all orders to 7%.*/
 UPDATE Order_Master SET GST = 7;
