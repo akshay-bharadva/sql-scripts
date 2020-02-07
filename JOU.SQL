@@ -152,11 +152,10 @@ DELETE FROM Salesman_Master WHERE Salary >5000;
 DELETE FROM Product_Master WHERE Quantity = 100;
 
 /*12.	Delete from Order_master where order duration more than 6 months.*/
-
+DELETE FROM Order_Master WHERE DATEDIFF('mm',Order_date,CURRENT_DATE) > 6;
 
 /*13.	Add a column called ‘telephone’ of data type number and size 10 to the salesman_master table.*/
 ALTER TABLE Salesman_Master ADD COLUMN 'Telephone' INTEGER(10);
-
 
 /*14.	Change the size of sell_price column in product_master to (10,2).*/
 ALTER TABLE Product_Master ALTER COLUMN Sell_Price NUMERIC(10,2);
@@ -165,12 +164,20 @@ ALTER TABLE Product_Master ALTER COLUMN Sell_Price NUMERIC(10,2);
 SELECT * FROM Salesman_Master WHERE City LIKE 'SURAT';
 
 /*16.	Display the name of the product whose order placed maximum time.*/
-SELECT Product_name FROM Product_Master WHERE Product_no IN
+SELECT * FROM Product_Master,
+    (SELECT Prod_no AS MAXPRODN FROM 
+        (SELECT COUNT(*) AS PRODC,Prod_no FROM Order_Master GROUP BY Prod_no
+        ),
+        (SELECT MAX(ALLPRODC) AS MAXPRODC FROM 
+            (SELECT COUNT(*) AS ALLPRODC,Prod_no FROM Order_Master GROUP BY Prod_no          
+            )            
+        )WHERE Prod_no = MAXPRODC
+    )WHERE Prod_no = MAXPRODN;
+/*SELECT Product_name FROM Product_Master WHERE Product_no IN
 	( SELECT Prod_no FROM Order_Master GROUP BY Prod_no HAVING count(*) = 
 	 	(SELECT COUNT(*) FROM Order_Master GROUP BY Prod_no ORDER BY COUNT(*) DESC LIMIT 1)
 	);
---SIR WILL TELL
--- THIS IS MINE HOGPOJ /**/ SELECT PRODUCT_NAME FROM PRODUCT_MASTER WHERE PRODUCT_NO = (SELECT MAX(COUNT(PROD_NO)) FROM ORDER_MASTER )--WHERE PROD_NO = MAX(COUNT(PROD_NO)) )
+*//*WORK IN MYSQL && TRIED AT NJ WITH JAYAN*/
 
 /*17.	Destroy the table Order_master along with its data.*/
 DROP TABLE Order_Master;
@@ -182,9 +189,15 @@ SELECT SUM(GST) FROM ORDER_MASTER  WHERE ORDER_DATE = CURRENT_DATE;
 SELECT Product_name FROM Product_Master WHERE Product_name LIKE 'A___'
 
 /*20.	Increase the price of products by 5% which has highest discount.*/
-UPDATE Order_Master SET Total_Amount = Total_Amount + ( Total_Amount * 0.05 ) 
+UPDATE Product_Master SET Sell_Price = Sell_Price + Sell_Price*0.05 WHERE Product_no = 
+    (SELECT Prod_no FROM ORDER_MASTER WHERE Discount =
+        (SELECT MAX(Discount) FROM ORDER_MASTER
+        )
+    );
+/*UPDATE Order_Master SET Total_Amount = Total_Amount + ( Total_Amount * 0.05 ) 
 WHERE Discount =( SELECT max(Discount) FROM Order_Master );
---SIR WILL TELL
+*//*WORK IN MYSQL && TRIED AT NJ WITH JAYAN*/
+
 
 /*21.	Display all the products sold today.*/
 SELECT Product_name FROM Product_Master WHERE Product_no = 
