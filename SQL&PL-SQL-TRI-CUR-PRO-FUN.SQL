@@ -223,7 +223,7 @@ on temp.department_id = d.department_id;
 
 
 20) Display the month in which more than 5 employees joined in any department located in Sydney.
-
+--HAVE TO THINK ABOUT IT AGAIN
 select loc.month from njct_a_locations l
 join (select temp.month,d.location_id from njct_a_departments d
 join (select department_id,extract(month from hire_date) month from njct_a_employees
