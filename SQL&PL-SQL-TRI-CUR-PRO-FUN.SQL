@@ -1,33 +1,33 @@
-1) Display number of employees joined after 15th of the month.
+1) DISPLAY NUMBER OF EMPLOYEES JOINED AFTER 15TH OF THE MONTH.
 
-select count(employee_id) from njct_a_employees where extract(day from hire_date) >  15;
+SELECT COUNT(EMPLOYEE_ID) FROM NJCT_A_EMPLOYEES WHERE EXTRACT(DAY FROM HIRE_DATE) >  15;
 --NOT SURE
 
 
-2) Display the country ID and number of cities we have in the country.
+2) DISPLAY THE COUNTRY ID AND NUMBER OF CITIES WE HAVE IN THE COUNTRY.
 
-select country_id,count(city) from njct_a_locations group by country_id;
+SELECT COUNTRY_ID,COUNT(CITY) FROM NJCT_A_LOCATIONS GROUP BY COUNTRY_ID;
 --NOT SURE CUZ SUPPOSE THE WE HAVE COUNTRY CODE BUT NO EMPLOYEE FROM THAT COUNTRY CITY
 --    \_(*.*)_/
 
 
-3) Display average salary of employees in each department who have commission percentage.
+3) DISPLAY AVERAGE SALARY OF EMPLOYEES IN EACH DEPARTMENT WHO HAVE COMMISSION PERCENTAGE.
 
-select department_id,avg(salary) from njct_a_employees
-where COMMISSION_PCT is not NULL
-group by department_id;
+SELECT DEPARTMENT_ID,AVG(SALARY) FROM NJCT_A_EMPLOYEES
+WHERE COMMISSION_PCT IS NOT NULL
+GROUP BY DEPARTMENT_ID;
 /*SELECT AVG(SALARY),DEPARTMENT_NAME FROM EMPLOYEES
 WHERE COMMISSION_PCT = '&COMMISSION_PCT'--COMMISION PERCENT
 GROUP BY DEPARTMENT_ID;*/
 
 
-4) Display job ID, number of employees, sum of salary,\
-and difference between highest salary
-and lowest salary of the employees of the job.
+4) DISPLAY JOB ID, NUMBER OF EMPLOYEES, SUM OF SALARY,\
+AND DIFFERENCE BETWEEN HIGHEST SALARY
+AND LOWEST SALARY OF THE EMPLOYEES OF THE JOB.
 
-select job_id,count(job_id) as Employee,
-sum(salary) as sumsalary,max(salary)-min(salary) as difference 
-from njct_a_employees group by job_id;
+SELECT JOB_ID,COUNT(JOB_ID) AS EMPLOYEE,
+SUM(SALARY) AS SUMSALARY,MAX(SALARY)-MIN(SALARY) AS DIFFERENCE 
+FROM NJCT_A_EMPLOYEES GROUP BY JOB_ID;
 /*
 ---NOT TRIED BUT MAY BE 100%  RIGHT?? :(
 --BY INNER JOIN
@@ -44,19 +44,19 @@ GROUP BY JOB_ID;
 */
 
 
-5) Display job ID for jobs with average salary more than 10000.
+5) DISPLAY JOB ID FOR JOBS WITH AVERAGE SALARY MORE THAN 10000.
 
-SELECT J.JOB_ID,AVG(E.SALARY) FROM njct_a_JOBS J
-JOIN njct_a_EMPLOYEEs E ON J.JOB_ID = E.JOB_ID
-GROUP BY e.JOB_ID
-having AVG(SALARY)>10000;
+SELECT J.JOB_ID,AVG(E.SALARY) FROM NJCT_A_JOBS J
+JOIN NJCT_A_EMPLOYEES E ON J.JOB_ID = E.JOB_ID
+GROUP BY E.JOB_ID
+HAVING AVG(SALARY)>10000;
 
 
 
-6) Display years in which more than 10 employees joined.
+6) DISPLAY YEARS IN WHICH MORE THAN 10 EMPLOYEES JOINED.
 --EXACTLY REQUIRED QUERY
-SELECT EXTRACT(YEAR FROM HIRE_DATE) AS RequiredYear,COUNT(HIRE_DATE)
-FROM njct_a_EMPLOYEES
+SELECT EXTRACT(YEAR FROM HIRE_DATE) AS REQUIREDYEAR,COUNT(HIRE_DATE)
+FROM NJCT_A_EMPLOYEES
 GROUP BY EXTRACT(YEAR FROM HIRE_DATE)
 HAVING COUNT(HIRE_DATE) > 10;
 
@@ -76,10 +76,10 @@ SELECT COUNT(HIRE_DATE),EXTRACT(YEAR FROM HIRE_DATE) FROM EMPLOYEES GROUP BY EXT
 
 */
 
-7) Display departments in which more than five employees have commission percentage.
-SELECT department_id,DEPARTMENT_NAME FROM njct_a_DEPARTMENTS
+7) DISPLAY DEPARTMENTS IN WHICH MORE THAN FIVE EMPLOYEES HAVE COMMISSION PERCENTAGE.
+SELECT DEPARTMENT_ID,DEPARTMENT_NAME FROM NJCT_A_DEPARTMENTS
 WHERE DEPARTMENT_ID IN (
-SELECT DEPARTMENT_ID FROM njct_a_EMPLOYEES 
+SELECT DEPARTMENT_ID FROM NJCT_A_EMPLOYEES 
 GROUP BY DEPARTMENT_ID
 HAVING COUNT(COMMISSION_PCT) > 5);
 
@@ -92,46 +92,46 @@ WHERE DEPARTMENT_ID IN (
 */
 
 
-8) Display employee ID for employees who did more than one job in the past.
+8) DISPLAY EMPLOYEE ID FOR EMPLOYEES WHO DID MORE THAN ONE JOB IN THE PAST.
 
-SELECT EMPLOYEE_ID from njct_a_JOB_HISTORY
+SELECT EMPLOYEE_ID FROM NJCT_A_JOB_HISTORY
 GROUP BY EMPLOYEE_ID
 HAVING COUNT(EMPLOYEE_ID) > 1;
 /*
-SELECT EMPLOYEE_ID from JOB_HISTORY
+SELECT EMPLOYEE_ID FROM JOB_HISTORY
 GROUP BY EMPLOYEE_ID
 HAVING COUNT(EMPLOYEE_ID) > 1;
 */
 
 
-9) Display job ID of jobs that were done by more than 3 employees for more than 100 days.
+9) DISPLAY JOB ID OF JOBS THAT WERE DONE BY MORE THAN 3 EMPLOYEES FOR MORE THAN 100 DAYS.
 
-select job_id from njct_a_employees 
-where TO_DATE(HIRE_DATE,'YYYY-MM-DD')-TO_DATE(SYSDATE,'YYYY-MM-DD') > 100
-group by job_id
-having count(job_id) > 3;
+SELECT JOB_ID FROM NJCT_A_EMPLOYEES 
+WHERE TO_DATE(HIRE_DATE,'YYYY-MM-DD')-TO_DATE(SYSDATE,'YYYY-MM-DD') > 100
+GROUP BY JOB_ID
+HAVING COUNT(JOB_ID) > 3;
 /*
-select TO_CHAR(sysdate,'DDD') from dual;
-SELECT TO_DATE(HIRE_DATE, 'YYYY-MM-DD') -  TO_DATE(SYSDATE, 'YYYY-MM-DD') DateDiff FROM njct_a_employees;
+SELECT TO_CHAR(SYSDATE,'DDD') FROM DUAL;
+SELECT TO_DATE(HIRE_DATE, 'YYYY-MM-DD') -  TO_DATE(SYSDATE, 'YYYY-MM-DD') DATEDIFF FROM NJCT_A_EMPLOYEES;
 */
 
 
-10) Display department ID, year, and Number of employees joined.
+10) DISPLAY DEPARTMENT ID, YEAR, AND NUMBER OF EMPLOYEES JOINED.
 
-SELECT DEPARTMENT_ID,EXTRACT(YEAR FROM HIRE_DATE) AS Y_E_A_R,COUNT(EMPLOYEE_ID) AS NO_OF_EMPLOYEE FROM njct_a_EMPLOYEEs 
+SELECT DEPARTMENT_ID,EXTRACT(YEAR FROM HIRE_DATE) AS Y_E_A_R,COUNT(EMPLOYEE_ID) AS NO_OF_EMPLOYEE FROM NJCT_A_EMPLOYEES 
 GROUP BY EXTRACT(YEAR FROM HIRE_DATE),DEPARTMENT_ID
-order by DEPARTMENT_ID;
+ORDER BY DEPARTMENT_ID;
 /*SELECT DEPARTMENT_ID,EXTRACT(YEAR FROM HIRE_DATE) AS 'YEAR',COUNT(EMPLOYEE_ID) AS 'NO OF EMPLOYEE'
 FROM EMPLOYEE 
 GROUP BY EXTRACT(YEAR FROM HIRE_DATE);
 */
 
 
-11) Display departments where any manager is managing more than 5 employees.
+11) DISPLAY DEPARTMENTS WHERE ANY MANAGER IS MANAGING MORE THAN 5 EMPLOYEES.
 
-select manager_id, count(manager_id) as underEmployee from njct_a_employees
-group by manager_id
-having count(manager_id) > 5;
+SELECT MANAGER_ID, COUNT(MANAGER_ID) AS UNDEREMPLOYEE FROM NJCT_A_EMPLOYEES
+GROUP BY MANAGER_ID
+HAVING COUNT(MANAGER_ID) > 5;
 
 /*
 SELECT DEPARTMENT_NAME FROM DEPARTMENT1
@@ -142,554 +142,559 @@ HAVING COUNT(MANAGER_ID) > 5
 );
 */
 
-12) Display department name, manager name, and city.
+12) DISPLAY DEPARTMENT NAME, MANAGER NAME, AND CITY.
 /*
 DEPARTMENTS -> DEPARTMENT_NAME,MANAGER_ID;
 EMPLOYEES -> MANAGER_NAME;
 LOCATIONS -> CITY;
 */
 
-select d.department_name,e.first_name,l.city from njct_a_departments d
-join njct_a_employees e on d.department_id = e.department_id
-join njct_a_locations l on d.location_id = l.location_id;
+SELECT D.DEPARTMENT_NAME,E.FIRST_NAME,L.CITY FROM NJCT_A_DEPARTMENTS D
+JOIN NJCT_A_EMPLOYEES E ON D.DEPARTMENT_ID = E.DEPARTMENT_ID
+JOIN NJCT_A_LOCATIONS L ON D.LOCATION_ID = L.LOCATION_ID;
 
-13) Display country name, city, and department name.
+13) DISPLAY COUNTRY NAME, CITY, AND DEPARTMENT NAME.
 
-select cn.country_name,l.city,d.department_name from njct_a_locations l
-join njct_a_countries cn on l.country_id = cn.country_id
-join njct_a_departments d on l.location_id = d.location_id;
-
-
-14) Display job title, department name, employee last name, starting date for all jobs from 2000 to 2005.
-
-select j.job_title,d.department_name,e.last_name from njct_a_job_history jh
-join njct_a_jobs j on jh.job_id = j.job_id
-join njct_a_employees e on jh.employee_id = e.employee_id
-join njct_a_departments d on jh.department_id = d.department_id
-where extract(year from jh.start_date) between 2000 and 2005;
-
-insert into NJCT_A_JOB_HISTORY values(116,'19-mar-2001','18-mar-2003',21,502);
-
-insert into NJCT_A_JOB_HISTORY values(115,'19-mar-1999','18-mar-2001',31,801);
-select * from NJCT_A_JOB_HISTORY;
+SELECT CN.COUNTRY_NAME,L.CITY,D.DEPARTMENT_NAME FROM NJCT_A_LOCATIONS L
+JOIN NJCT_A_COUNTRIES CN ON L.COUNTRY_ID = CN.COUNTRY_ID
+JOIN NJCT_A_DEPARTMENTS D ON L.LOCATION_ID = D.LOCATION_ID;
 
 
-15) Display job title and average salary of employees
+14) DISPLAY JOB TITLE, DEPARTMENT NAME, EMPLOYEE LAST NAME, STARTING DATE FOR ALL JOBS FROM 2000 TO 2005.
 
-select jt.job_title,temp.avgsalary from njct_a_jobs jt
-join ( select e.job_id,avg(e.salary) avgsalary from njct_a_jobs j
-join njct_a_employees e on e.job_id = j.job_id
-group by e.job_id) temp on jt.job_id = temp.job_id;
+SELECT J.JOB_TITLE,D.DEPARTMENT_NAME,E.LAST_NAME FROM NJCT_A_JOB_HISTORY JH
+JOIN NJCT_A_JOBS J ON JH.JOB_ID = J.JOB_ID
+JOIN NJCT_A_EMPLOYEES E ON JH.EMPLOYEE_ID = E.EMPLOYEE_ID
+JOIN NJCT_A_DEPARTMENTS D ON JH.DEPARTMENT_ID = D.DEPARTMENT_ID
+WHERE EXTRACT(YEAR FROM JH.START_DATE) BETWEEN 2000 AND 2005;
+
+INSERT INTO NJCT_A_JOB_HISTORY VALUES(116,'19-MAR-2001','18-MAR-2003',21,502);
+
+INSERT INTO NJCT_A_JOB_HISTORY VALUES(115,'19-MAR-1999','18-MAR-2001',31,801);
+SELECT * FROM NJCT_A_JOB_HISTORY;
 
 
-16) Display details of jobs that were done by any employee who is currently drawing more than 15000 of salary.
+15) DISPLAY JOB TITLE AND AVERAGE SALARY OF EMPLOYEES
 
-select distinct j.job_id,j.job_title from njct_a_jobs j
-join njct_a_employees e on j.job_id = e.job_id
-where e.salary > 15000;
+SELECT JT.JOB_TITLE,TEMP.AVGSALARY FROM NJCT_A_JOBS JT
+JOIN ( SELECT E.JOB_ID,AVG(E.SALARY) AVGSALARY FROM NJCT_A_JOBS J
+JOIN NJCT_A_EMPLOYEES E ON E.JOB_ID = J.JOB_ID
+GROUP BY E.JOB_ID) TEMP ON JT.JOB_ID = TEMP.JOB_ID;
 
-17) Display department name, manager name, and salary of the manager for all managers whose experience is more than 5 years.
 
-select d.department_name,temp.first_name,temp.salary from njct_a_departments d
-join (select distinct m.department_id,m.first_name,m.salary from njct_a_employees m
-join njct_a_employees e on e.manager_id = m.employee_id
-where (extract(year from sysdate)-extract(year from m.hire_date))>5) temp
-on d.department_id = temp.department_id;
+16) DISPLAY DETAILS OF JOBS THAT WERE DONE BY ANY EMPLOYEE WHO IS CURRENTLY DRAWING MORE THAN 15000 OF SALARY.
+
+SELECT DISTINCT J.JOB_ID,J.JOB_TITLE FROM NJCT_A_JOBS J
+JOIN NJCT_A_EMPLOYEES E ON J.JOB_ID = E.JOB_ID
+WHERE E.SALARY > 15000;
+
+17) DISPLAY DEPARTMENT NAME, MANAGER NAME, AND SALARY OF THE MANAGER FOR ALL MANAGERS WHOSE EXPERIENCE IS MORE THAN 5 YEARS.
+
+SELECT D.DEPARTMENT_NAME,TEMP.FIRST_NAME,TEMP.SALARY FROM NJCT_A_DEPARTMENTS D
+JOIN (SELECT DISTINCT M.DEPARTMENT_ID,M.FIRST_NAME,M.SALARY FROM NJCT_A_EMPLOYEES M
+JOIN NJCT_A_EMPLOYEES E ON E.MANAGER_ID = M.EMPLOYEE_ID
+WHERE (EXTRACT(YEAR FROM SYSDATE)-EXTRACT(YEAR FROM M.HIRE_DATE))>5) TEMP
+ON D.DEPARTMENT_ID = TEMP.DEPARTMENT_ID;
 /*
-select distinct m.first_name,m.salary from njct_a_employees m
-join njct_a_employees e on e.manager_id = m.employee_id
-where (extract(year from sysdate)-extract(year from m.hire_date))>5;
+SELECT DISTINCT M.FIRST_NAME,M.SALARY FROM NJCT_A_EMPLOYEES M
+JOIN NJCT_A_EMPLOYEES E ON E.MANAGER_ID = M.EMPLOYEE_ID
+WHERE (EXTRACT(YEAR FROM SYSDATE)-EXTRACT(YEAR FROM M.HIRE_DATE))>5;
 
 */
 
 
-18) Display employee name, job title for the jobs employee did in the past where the job was done less than six months.
+18) DISPLAY EMPLOYEE NAME, JOB TITLE FOR THE JOBS EMPLOYEE DID IN THE PAST WHERE THE JOB WAS DONE LESS THAN SIX MONTHS.
 
-select e.first_name,j.job_title from njct_a_employees e
-join (select m.employee_id,m.job_id from njct_a_job_history m
-join njct_a_job_history y on extract(year from m.start_date) = extract(year from y.end_date) and m.employee_id = y.employee_id
-where (extract(month from m.end_date)-extract(month from m.start_date))<6) temp
-on e.employee_id = temp.employee_id
-join njct_a_jobs j on temp.job_id = j.job_id;
-
-
-19) Display department name, average salary and number of employees with commission within the department.
-
-select d.department_name,temp.avgsalary,temp.comm_count from njct_a_departments d
-join (select department_id,avg(salary) avgsalary,count(commission_pct) comm_count from njct_a_employees 
-group by department_id) temp
-on temp.department_id = d.department_id;
+SELECT E.FIRST_NAME,J.JOB_TITLE FROM NJCT_A_EMPLOYEES E
+JOIN (SELECT M.EMPLOYEE_ID,M.JOB_ID FROM NJCT_A_JOB_HISTORY M
+JOIN NJCT_A_JOB_HISTORY Y ON EXTRACT(YEAR FROM M.START_DATE) = EXTRACT(YEAR FROM Y.END_DATE) AND M.EMPLOYEE_ID = Y.EMPLOYEE_ID
+WHERE (EXTRACT(MONTH FROM M.END_DATE)-EXTRACT(MONTH FROM M.START_DATE))<6) TEMP
+ON E.EMPLOYEE_ID = TEMP.EMPLOYEE_ID
+JOIN NJCT_A_JOBS J ON TEMP.JOB_ID = J.JOB_ID;
 
 
+19) DISPLAY DEPARTMENT NAME, AVERAGE SALARY AND NUMBER OF EMPLOYEES WITH COMMISSION WITHIN THE DEPARTMENT.
 
-20) Display the month in which more than 5 employees joined in any department located in Sydney.
+SELECT D.DEPARTMENT_NAME,TEMP.AVGSALARY,TEMP.COMM_COUNT FROM NJCT_A_DEPARTMENTS D
+JOIN (SELECT DEPARTMENT_ID,AVG(SALARY) AVGSALARY,COUNT(COMMISSION_PCT) COMM_COUNT FROM NJCT_A_EMPLOYEES 
+GROUP BY DEPARTMENT_ID) TEMP
+ON TEMP.DEPARTMENT_ID = D.DEPARTMENT_ID;
+
+
+
+20) DISPLAY THE MONTH IN WHICH MORE THAN 5 EMPLOYEES JOINED IN ANY DEPARTMENT LOCATED IN SYDNEY.
 --HAVE TO THINK ABOUT IT AGAIN
-select loc.month from njct_a_locations l
-join (select temp.month,d.location_id from njct_a_departments d
-join (select department_id,extract(month from hire_date) month from njct_a_employees
-group by extract(year from hire_date),extract(month from hire_date),department_id
-having count(extract(month from hire_date)) > 5) temp
-on d.department_id = temp.department_id) loc
-on l.location_id = loc.location_id
-where city like 'sydeny';
+SELECT LOC.MONTH FROM NJCT_A_LOCATIONS L
+JOIN (SELECT TEMP.MONTH,D.LOCATION_ID FROM NJCT_A_DEPARTMENTS D
+JOIN (SELECT DEPARTMENT_ID,EXTRACT(MONTH FROM HIRE_DATE) MONTH FROM NJCT_A_EMPLOYEES
+GROUP BY EXTRACT(YEAR FROM HIRE_DATE),EXTRACT(MONTH FROM HIRE_DATE),DEPARTMENT_ID
+HAVING COUNT(EXTRACT(MONTH FROM HIRE_DATE)) > 5) TEMP
+ON D.DEPARTMENT_ID = TEMP.DEPARTMENT_ID) LOC
+ON L.LOCATION_ID = LOC.LOCATION_ID
+WHERE CITY LIKE 'SYDENY';
 
-/*	this query dives the department_id
-select department_id,count(extract(month from hire_date)),extract(month from hire_date),extract(year from hire_date) from njct_a_employees
-group by extract(year from hire_date),extract(month from hire_date),department_id
-having count(extract(month from hire_date)) > 1;
+/*	THIS QUERY DIVES THE DEPARTMENT_ID
+SELECT DEPARTMENT_ID,COUNT(EXTRACT(MONTH FROM HIRE_DATE)),EXTRACT(MONTH FROM HIRE_DATE),EXTRACT(YEAR FROM HIRE_DATE) FROM NJCT_A_EMPLOYEES
+GROUP BY EXTRACT(YEAR FROM HIRE_DATE),EXTRACT(MONTH FROM HIRE_DATE),DEPARTMENT_ID
+HAVING COUNT(EXTRACT(MONTH FROM HIRE_DATE)) > 1;
 */
 
-/*	this query will give loactions 
-select location_id from njct_a_departments d
-join (select department_id from njct_a_employees
-group by extract(year from hire_date),extract(month from hire_date),department_id
-having count(extract(month from hire_date)) > 1) temp
-on d.department_id = temp.department_id;
+/*	THIS QUERY WILL GIVE LOACTIONS 
+SELECT LOCATION_ID FROM NJCT_A_DEPARTMENTS D
+JOIN (SELECT DEPARTMENT_ID FROM NJCT_A_EMPLOYEES
+GROUP BY EXTRACT(YEAR FROM HIRE_DATE),EXTRACT(MONTH FROM HIRE_DATE),DEPARTMENT_ID
+HAVING COUNT(EXTRACT(MONTH FROM HIRE_DATE)) > 1) TEMP
+ON D.DEPARTMENT_ID = TEMP.DEPARTMENT_ID;
 */
 
 /*
-select city from njct_a_locations l
-join (select location_id from njct_a_departments d
-join (select department_id from njct_a_employees
-group by extract(year from hire_date),extract(month from hire_date),department_id
-having count(extract(month from hire_date)) > 1) temp
-on d.department_id = temp.department_id) loc
-on l.location_id = loc.location_id
-where city like 'sydeny';
+SELECT CITY FROM NJCT_A_LOCATIONS L
+JOIN (SELECT LOCATION_ID FROM NJCT_A_DEPARTMENTS D
+JOIN (SELECT DEPARTMENT_ID FROM NJCT_A_EMPLOYEES
+GROUP BY EXTRACT(YEAR FROM HIRE_DATE),EXTRACT(MONTH FROM HIRE_DATE),DEPARTMENT_ID
+HAVING COUNT(EXTRACT(MONTH FROM HIRE_DATE)) > 1) TEMP
+ON D.DEPARTMENT_ID = TEMP.DEPARTMENT_ID) LOC
+ON L.LOCATION_ID = LOC.LOCATION_ID
+WHERE CITY LIKE 'SYDENY';
 */
 
 
-21) Display details of departments in which the maximum salary is more than 10000.
+21) DISPLAY DETAILS OF DEPARTMENTS IN WHICH THE MAXIMUM SALARY IS MORE THAN 10000.
 
-select d.department_id,d.department_name from njct_a_departments d
-join (select distinct department_id from njct_a_employees
-where job_id in (select job_id from njct_a_jobs
-where max_salary > 10000)) temp
-on d.department_id = temp.department_id;
-
-
-
-22) Display jobs into which employees joined in the current year.
-
-select j.job_id,job_title from njct_a_jobs j
-join (select job_id from njct_a_employees
-where extract(year from hire_date) = extract(year from sysdate)) ji
-on j.job_id = ji.job_id;
+SELECT D.DEPARTMENT_ID,D.DEPARTMENT_NAME FROM NJCT_A_DEPARTMENTS D
+JOIN (SELECT DISTINCT DEPARTMENT_ID FROM NJCT_A_EMPLOYEES
+WHERE JOB_ID IN (SELECT JOB_ID FROM NJCT_A_JOBS
+WHERE MAX_SALARY > 10000)) TEMP
+ON D.DEPARTMENT_ID = TEMP.DEPARTMENT_ID;
 
 
 
-23) Display employees who did not do any job in the past.
+22) DISPLAY JOBS INTO WHICH EMPLOYEES JOINED IN THE CURRENT YEAR.
 
-select employee_id,first_name,last_name from njct_a_employees
-where employee_id not in(select employee_id from njct_a_job_history);
+SELECT J.JOB_ID,JOB_TITLE FROM NJCT_A_JOBS J
+JOIN (SELECT JOB_ID FROM NJCT_A_EMPLOYEES
+WHERE EXTRACT(YEAR FROM HIRE_DATE) = EXTRACT(YEAR FROM SYSDATE)) JI
+ON J.JOB_ID = JI.JOB_ID;
 
-24) Display job title and average salary for employees who did a job in the past.
 
-select job_title,temp.avg_salary from njct_a_jobs j
-join (select job_id,avg(salary) avg_salary from njct_a_employees
-where employee_id in (select employee_id from njct_a_job_history)
-group by job_id) temp
-on j.job_id = temp.job_id;
+
+23) DISPLAY EMPLOYEES WHO DID NOT DO ANY JOB IN THE PAST.
+
+SELECT EMPLOYEE_ID,FIRST_NAME,LAST_NAME FROM NJCT_A_EMPLOYEES
+WHERE EMPLOYEE_ID NOT IN(SELECT EMPLOYEE_ID FROM NJCT_A_JOB_HISTORY);
+
+24) DISPLAY JOB TITLE AND AVERAGE SALARY FOR EMPLOYEES WHO DID A JOB IN THE PAST.
+
+SELECT JOB_TITLE,TEMP.AVG_SALARY FROM NJCT_A_JOBS J
+JOIN (SELECT JOB_ID,AVG(SALARY) AVG_SALARY FROM NJCT_A_EMPLOYEES
+WHERE EMPLOYEE_ID IN (SELECT EMPLOYEE_ID FROM NJCT_A_JOB_HISTORY)
+GROUP BY JOB_ID) TEMP
+ON J.JOB_ID = TEMP.JOB_ID;
 /*
-select job_id,avg(salary) from njct_a_employees
-group by job_id;
+SELECT JOB_ID,AVG(SALARY) FROM NJCT_A_EMPLOYEES
+GROUP BY JOB_ID;
 */
 
 
-25) Display country name, city, and number of departments where department has more than 5 employees.
+25) DISPLAY COUNTRY NAME, CITY, AND NUMBER OF DEPARTMENTS WHERE DEPARTMENT HAS MORE THAN 5 EMPLOYEES.
 
-select c.country_name,temp1.city,temp1.no_of_dept from njct_a_countries c
-join (select l.location_id,l.city,l.country_id,temp.no_of_dept from njct_a_locations l
-join (select location_id,count(location_id) no_of_dept from njct_a_departments d 
-join (select department_id from njct_a_employees
-group by department_id
-having count(department_id) > 3) ed
-on d.department_id = ed. department_id
-group by location_id) temp
-on temp.location_id = l.location_id) temp1
-on c.country_id = temp1.country_id;
+SELECT C.COUNTRY_NAME,TEMP1.CITY,TEMP1.NO_OF_DEPT FROM NJCT_A_COUNTRIES C
+JOIN (SELECT L.LOCATION_ID,L.CITY,L.COUNTRY_ID,TEMP.NO_OF_DEPT FROM NJCT_A_LOCATIONS L
+JOIN (SELECT LOCATION_ID,COUNT(LOCATION_ID) NO_OF_DEPT FROM NJCT_A_DEPARTMENTS D 
+JOIN (SELECT DEPARTMENT_ID FROM NJCT_A_EMPLOYEES
+GROUP BY DEPARTMENT_ID
+HAVING COUNT(DEPARTMENT_ID) > 3) ED
+ON D.DEPARTMENT_ID = ED. DEPARTMENT_ID
+GROUP BY LOCATION_ID) TEMP
+ON TEMP.LOCATION_ID = L.LOCATION_ID) TEMP1
+ON C.COUNTRY_ID = TEMP1.COUNTRY_ID;
 /*
-select location_id,count(location_id) no_of_dept from njct_a_departments d
-join (select department_id from njct_a_employees
-group by department_id
-having count(department_id) > 3) ed
-on d.department_id = ed. department_id
-group by location_id;
+SELECT LOCATION_ID,COUNT(LOCATION_ID) NO_OF_DEPT FROM NJCT_A_DEPARTMENTS D
+JOIN (SELECT DEPARTMENT_ID FROM NJCT_A_EMPLOYEES
+GROUP BY DEPARTMENT_ID
+HAVING COUNT(DEPARTMENT_ID) > 3) ED
+ON D.DEPARTMENT_ID = ED. DEPARTMENT_ID
+GROUP BY LOCATION_ID;
 */
 
 
 
 
-26) Display details of manager who manages more than 5 employees.
+26) DISPLAY DETAILS OF MANAGER WHO MANAGES MORE THAN 5 EMPLOYEES.
 
-select det.employee_id manager,det.first_name,det.last_name,temp.no_of_emp from njct_a_employees det
-join (select m.employee_id,count(m.employee_id) no_of_emp from njct_a_employees m
-join njct_a_employees e on m.employee_id = e.manager_id
-group by m.employee_id
-having count(m.employee_id) > 5) temp
-on det.employee_id = temp.employee_id;
+SELECT DET.EMPLOYEE_ID MANAGER,DET.FIRST_NAME,DET.LAST_NAME,TEMP.NO_OF_EMP FROM NJCT_A_EMPLOYEES DET
+JOIN (SELECT M.EMPLOYEE_ID,COUNT(M.EMPLOYEE_ID) NO_OF_EMP FROM NJCT_A_EMPLOYEES M
+JOIN NJCT_A_EMPLOYEES E ON M.EMPLOYEE_ID = E.MANAGER_ID
+GROUP BY M.EMPLOYEE_ID
+HAVING COUNT(M.EMPLOYEE_ID) > 5) TEMP
+ON DET.EMPLOYEE_ID = TEMP.EMPLOYEE_ID;
 
-27) Display the departments into which no employee joined in last two years.
+27) DISPLAY THE DEPARTMENTS INTO WHICH NO EMPLOYEE JOINED IN LAST TWO YEARS.
 
-select * from njct_a_departments
-where department_id not in(select distinct department_id from njct_a_employees
-where (extract(year from sysdate)-extract(year from hire_date)) < 2);
-
-
-28) Display the details of departments in which the max salary is greater than 10000 for employees who did a job in the past.
-
-select * from njct_a_departments d
-join (select jh.department_id from njct_a_jobs j
-join njct_a_job_history jh
-on jh.job_id = j.job_id
-where max_salary > 10000) temp
-on d.department_id = temp.department_id;
-
-29) Display third highest salary of all employees
-
-select min(salary)
-from (select distinct salary from njct_a_employees
-where rownum < 4
-order by salary desc);
-
-1) Find out the name of the employee and name of the department for the employee who is
-managing for employee 103.
-
-declare
-
-v_eid njct_a_employees.employee_id%type;
-v_fn njct_a_employees.first_name%type;
-v_did njct_a_employees.department_id%type;
-v_dn njct_a_departments.department_name%type;
-
-begin
-
-v_eid := &v_eid;
-
-select e.first_name,e.department_id into v_fn,v_did from njct_a_employees e
-join njct_a_employees m on e.employee_id = m.manager_id
-where m.employee_id = v_eid;
-
-select department_name into v_dn from njct_a_departments where department_id = v_did;
-
-dbms_output.put_line('Manager Name :- '|| v_fn);
-dbms_output.put_line('Department Name :- '|| v_dn);
-
-end;
+SELECT * FROM NJCT_A_DEPARTMENTS
+WHERE DEPARTMENT_ID NOT IN(SELECT DISTINCT DEPARTMENT_ID FROM NJCT_A_EMPLOYEES
+WHERE (EXTRACT(YEAR FROM SYSDATE)-EXTRACT(YEAR FROM HIRE_DATE)) < 2);
 
 
-2) Display the year in which maximum number of employees joined along with how many joined in each month in that year.
+28) DISPLAY THE DETAILS OF DEPARTMENTS IN WHICH THE MAX SALARY IS GREATER THAN 10000 FOR EMPLOYEES WHO DID A JOB IN THE PAST.
 
-declare
-v_max_count number;
-v_year number;
-v_month number;
-v_count number;
+SELECT * FROM NJCT_A_DEPARTMENTS D
+JOIN (SELECT JH.DEPARTMENT_ID FROM NJCT_A_JOBS J
+JOIN NJCT_A_JOB_HISTORY JH
+ON JH.JOB_ID = J.JOB_ID
+WHERE MAX_SALARY > 10000) TEMP
+ON D.DEPARTMENT_ID = TEMP.DEPARTMENT_ID;
 
-cursor curmonthwise(v_month_year number)
-is select extract(month from hire_date),count(extract(month from hire_date)) from njct_a_employees
-where extract(year from hire_date) = v_month_year
-group by extract(month from hire_date);
+29) DISPLAY THIRD HIGHEST SALARY OF ALL EMPLOYEES
 
-begin
+SELECT MIN(SALARY) FROM (
+SELECT SALARY FROM NJCT_A_EMPLOYEES 
+WHERE SALARY IS NOT NULL 
+ORDER BY SALARY DESC
+) WHERE ROWNUM<=3;
+/*SELECT MIN(SALARY)
+FROM (SELECT DISTINCT SALARY FROM NJCT_A_EMPLOYEES
+WHERE ROWNUM < 4
+ORDER BY SALARY DESC);*/
 
-select max(count(extract(year from hire_date))) into v_max_count from njct_a_employees
-group by extract(year from hire_date);
+1) FIND OUT THE NAME OF THE EMPLOYEE AND NAME OF THE DEPARTMENT FOR THE EMPLOYEE WHO IS
+MANAGING FOR EMPLOYEE 103.
 
-select extract(year from hire_date) into v_year from njct_a_employees
-group by extract(year from hire_date)
-having count(extract(year from hire_date)) = v_max_count;
+DECLARE
 
-dbms_output.put_line('Year : '||v_year);
-dbms_output.put_line('No. of Employee Joined : '||v_max_count);
+V_EID NJCT_A_EMPLOYEES.EMPLOYEE_ID%TYPE;
+V_FN NJCT_A_EMPLOYEES.FIRST_NAME%TYPE;
+V_DID NJCT_A_EMPLOYEES.DEPARTMENT_ID%TYPE;
+V_DN NJCT_A_DEPARTMENTS.DEPARTMENT_NAME%TYPE;
 
-open curmonthwise(v_year);
-loop
-fetch curmonthwise into v_month,v_count;
+BEGIN
 
-dbms_output.put_line('MONTH : '||v_month||' No of Employee Hired : '||v_count);
+V_EID := &V_EID;
 
-exit when curmonthwise%NOTFOUND;
-end loop;
+SELECT E.FIRST_NAME,E.DEPARTMENT_ID INTO V_FN,V_DID FROM NJCT_A_EMPLOYEES E
+JOIN NJCT_A_EMPLOYEES M ON E.EMPLOYEE_ID = M.MANAGER_ID
+WHERE M.EMPLOYEE_ID = V_EID;
 
-close curmonthwise;
-exception 
-when invalid_cursor then
-dbms_output.put_line('Cursor is invalid, kindly contact the administrator');
-end;
+SELECT DEPARTMENT_NAME INTO V_DN FROM NJCT_A_DEPARTMENTS WHERE DEPARTMENT_ID = V_DID;
 
-3) Change salary of employee 130 to the salary of the employee with first name ‘Joe’. If Joe is
-not found then take average salary of all employees. If more than one employee with first 
-name ‘Joe’ is found then take the least salary of the employees with first name Joe. [Use
-Exceptions] 
+DBMS_OUTPUT.PUT_LINE('MANAGER NAME :- '|| V_FN);
+DBMS_OUTPUT.PUT_LINE('DEPARTMENT NAME :- '|| V_DN);
 
-3) Change salary of employee 130 to the salary of the employee with first name ‘Joe’. If Joe is
-not found then take average salary of all employees. If more than one employee with first 
-name ‘Joe’ is found then take the least salary of the employees with first name Joe. [Use
-Exceptions]
+END;
+
+
+2) DISPLAY THE YEAR IN WHICH MAXIMUM NUMBER OF EMPLOYEES JOINED ALONG WITH HOW MANY JOINED IN EACH MONTH IN THAT YEAR.
+
+DECLARE
+V_MAX_COUNT NUMBER;
+V_YEAR NUMBER;
+V_MONTH NUMBER;
+V_COUNT NUMBER;
+
+CURSOR CURMONTHWISE(V_MONTH_YEAR NUMBER)
+IS SELECT EXTRACT(MONTH FROM HIRE_DATE),COUNT(EXTRACT(MONTH FROM HIRE_DATE)) FROM NJCT_A_EMPLOYEES
+WHERE EXTRACT(YEAR FROM HIRE_DATE) = V_MONTH_YEAR
+GROUP BY EXTRACT(MONTH FROM HIRE_DATE);
+
+BEGIN
+
+SELECT MAX(COUNT(EXTRACT(YEAR FROM HIRE_DATE))) INTO V_MAX_COUNT FROM NJCT_A_EMPLOYEES
+GROUP BY EXTRACT(YEAR FROM HIRE_DATE);
+
+SELECT EXTRACT(YEAR FROM HIRE_DATE) INTO V_YEAR FROM NJCT_A_EMPLOYEES
+GROUP BY EXTRACT(YEAR FROM HIRE_DATE)
+HAVING COUNT(EXTRACT(YEAR FROM HIRE_DATE)) = V_MAX_COUNT;
+
+DBMS_OUTPUT.PUT_LINE('YEAR : '||V_YEAR);
+DBMS_OUTPUT.PUT_LINE('NO. OF EMPLOYEE JOINED : '||V_MAX_COUNT);
+
+OPEN CURMONTHWISE(V_YEAR);
+LOOP
+FETCH CURMONTHWISE INTO V_MONTH,V_COUNT;
+
+DBMS_OUTPUT.PUT_LINE('MONTH : '||V_MONTH||' NO OF EMPLOYEE HIRED : '||V_COUNT);
+
+EXIT WHEN CURMONTHWISE%NOTFOUND;
+END LOOP;
+
+CLOSE CURMONTHWISE;
+EXCEPTION 
+WHEN INVALID_CURSOR THEN
+DBMS_OUTPUT.PUT_LINE('CURSOR IS INVALID, KINDLY CONTACT THE ADMINISTRATOR');
+END;
+
+3) CHANGE SALARY OF EMPLOYEE 130 TO THE SALARY OF THE EMPLOYEE WITH FIRST NAME ‘JOE’. IF JOE IS
+NOT FOUND THEN TAKE AVERAGE SALARY OF ALL EMPLOYEES. IF MORE THAN ONE EMPLOYEE WITH FIRST 
+NAME ‘JOE’ IS FOUND THEN TAKE THE LEAST SALARY OF THE EMPLOYEES WITH FIRST NAME JOE. [USE
+EXCEPTIONS] 
+
+3) CHANGE SALARY OF EMPLOYEE 130 TO THE SALARY OF THE EMPLOYEE WITH FIRST NAME ‘JOE’. IF JOE IS
+NOT FOUND THEN TAKE AVERAGE SALARY OF ALL EMPLOYEES. IF MORE THAN ONE EMPLOYEE WITH FIRST 
+NAME ‘JOE’ IS FOUND THEN TAKE THE LEAST SALARY OF THE EMPLOYEES WITH FIRST NAME JOE. [USE
+EXCEPTIONS]
 /*
-salary of 130 to the fn->joe
-if joe is notfound 
-then 
-salary of 130 = avg(salary)
-else if more than one joe is found the min(salary of joe);
+SALARY OF 130 TO THE FN->JOE
+IF JOE IS NOTFOUND 
+THEN 
+SALARY OF 130 = AVG(SALARY)
+ELSE IF MORE THAN ONE JOE IS FOUND THE MIN(SALARY OF JOE);
 */
-declare 
+DECLARE 
 
-v_salary njct_a_employees.salary%TYPE;
+V_SALARY NJCT_A_EMPLOYEES.SALARY%TYPE;
 
-begin
+BEGIN
 
-select salary into v_salary from njct_a_employees where first_name like 'Joe';
-update njct_a_employees set salary = v_salary where employee_id = 130;
-dbms_output.put_line('Salary Updated Successfully');
+SELECT SALARY INTO V_SALARY FROM NJCT_A_EMPLOYEES WHERE FIRST_NAME LIKE 'JOE';
+UPDATE NJCT_A_EMPLOYEES SET SALARY = V_SALARY WHERE EMPLOYEE_ID = 130;
+DBMS_OUTPUT.PUT_LINE('SALARY UPDATED SUCCESSFULLY');
 
-exception
-when no_data_found then
-  select avg(salary) into v_salary from njct_a_employees;
-  update njct_a_employees set salary = v_salary where employee_id = 130;
-  dbms_output.put_line('Salary Updated Successfully');
-when too_many_rows then
-  select min(salary) into v_salary from njct_a_employees where first_name like 'Joe';
-  update njct_a_employees set salary = v_salary where employee_id = 130;
-  dbms_output.put_line('Salary Updated Successfully');
-when others then
-  dbms_output.put_line('An error occurred');
+EXCEPTION
+WHEN NO_DATA_FOUND THEN
+  SELECT AVG(SALARY) INTO V_SALARY FROM NJCT_A_EMPLOYEES;
+  UPDATE NJCT_A_EMPLOYEES SET SALARY = V_SALARY WHERE EMPLOYEE_ID = 130;
+  DBMS_OUTPUT.PUT_LINE('SALARY UPDATED SUCCESSFULLY');
+WHEN TOO_MANY_ROWS THEN
+  SELECT MIN(SALARY) INTO V_SALARY FROM NJCT_A_EMPLOYEES WHERE FIRST_NAME LIKE 'JOE';
+  UPDATE NJCT_A_EMPLOYEES SET SALARY = V_SALARY WHERE EMPLOYEE_ID = 130;
+  DBMS_OUTPUT.PUT_LINE('SALARY UPDATED SUCCESSFULLY');
+WHEN OTHERS THEN
+  DBMS_OUTPUT.PUT_LINE('AN ERROR OCCURRED');
 
-end;
+END;
 /*
-select employee_id,first_name,salary from njct_a_employees order by first_name;
+SELECT EMPLOYEE_ID,FIRST_NAME,SALARY FROM NJCT_A_EMPLOYEES ORDER BY FIRST_NAME;
 
-select min(salary) from njct_a_employees where first_name like 'C'
-group by first_name ;s
+SELECT MIN(SALARY) FROM NJCT_A_EMPLOYEES WHERE FIRST_NAME LIKE 'C'
+GROUP BY FIRST_NAME ;S
 */
 
-4) Display Job Title and Name of the Employee who joined the job first day. 
+4) DISPLAY JOB TITLE AND NAME OF THE EMPLOYEE WHO JOINED THE JOB FIRST DAY. 
 /*
-select job_title,first_name from njct_a_jobs j
-join njct_a_employees e on e.job_id = j.job_id
-where TO_DATE(HIRE_DATE,'YYYY-MM-DD')-TO_DATE(SYSDATE,'YYYY-MM-DD')  = 0;
+SELECT JOB_TITLE,FIRST_NAME FROM NJCT_A_JOBS J
+JOIN NJCT_A_EMPLOYEES E ON E.JOB_ID = J.JOB_ID
+WHERE TO_DATE(HIRE_DATE,'YYYY-MM-DD')-TO_DATE(SYSDATE,'YYYY-MM-DD')  = 0;
 */
-declare
-v_firstname njct_a_employees.first_name%TYPE;
-v_job_title njct_a_jobs.job_title%TYPE;
+DECLARE
+V_FIRSTNAME NJCT_A_EMPLOYEES.FIRST_NAME%TYPE;
+V_JOB_TITLE NJCT_A_JOBS.JOB_TITLE%TYPE;
 
-cursor cur_first_day
-is select job_title,first_name from njct_a_jobs j
-join njct_a_employees e on e.job_id = j.job_id
-where TO_DATE(HIRE_DATE,'YYYY-MM-DD')-TO_DATE(SYSDATE,'YYYY-MM-DD')  = 0;
+CURSOR CUR_FIRST_DAY
+IS SELECT JOB_TITLE,FIRST_NAME FROM NJCT_A_JOBS J
+JOIN NJCT_A_EMPLOYEES E ON E.JOB_ID = J.JOB_ID
+WHERE TO_DATE(HIRE_DATE,'YYYY-MM-DD')-TO_DATE(SYSDATE,'YYYY-MM-DD')  = 0;
 
-begin
+BEGIN
 
-open cur_first_day;
+OPEN CUR_FIRST_DAY;
 
-if cur_first_day%rowcount = 0 then
-dbms_output.put_line('No one have First Day TODAY!!!');
-else 
-loop
-fetch cur_first_day into v_job_title,v_firstname;
-exit when cur_first_day%NOTFOUND;
-dbms_output.put_line('JOB : '||v_job_title||' Employee Name :'||v_firstname);
-end loop;
-end if;
+IF CUR_FIRST_DAY%ROWCOUNT = 0 THEN
+DBMS_OUTPUT.PUT_LINE('NO ONE HAVE FIRST DAY TODAY!!!');
+ELSE 
+LOOP
+FETCH CUR_FIRST_DAY INTO V_JOB_TITLE,V_FIRSTNAME;
+EXIT WHEN CUR_FIRST_DAY%NOTFOUND;
+DBMS_OUTPUT.PUT_LINE('JOB : '||V_JOB_TITLE||' EMPLOYEE NAME :'||V_FIRSTNAME);
+END LOOP;
+END IF;
 
-close cur_first_day;
+CLOSE CUR_FIRST_DAY;
 
-exception
-when INVALID_CURSOR then --INVALID_CURSOR
-dbms_output.put_line('INVALID CURSOR CHECK AGAIN!!');
-end;
-
-/*
-open cur_first_day;
-loop
-fetch cur_first_day into v_job_title,v_firstname;
-exit when cur_first_day%NOTFOUND;
-dbms_output.put_line('JOB : '||v_job_title||' Employee Name :'||v_firstname);
-end loop;
-close cur_first_day;
-exception
-when no_data_found then --INVALID_CURSOR
-dbms_output.put_line('No one have First Day TODAY!!!');
-*/
-
-
+EXCEPTION
+WHEN INVALID_CURSOR THEN --INVALID_CURSOR
+DBMS_OUTPUT.PUT_LINE('INVALID CURSOR CHECK AGAIN!!');
+END;
 
 /*
-select * from njct_a_employees;
-update njct_a_employees set hire_date = '19-12-20' where employee_id =117;
+OPEN CUR_FIRST_DAY;
+LOOP
+FETCH CUR_FIRST_DAY INTO V_JOB_TITLE,V_FIRSTNAME;
+EXIT WHEN CUR_FIRST_DAY%NOTFOUND;
+DBMS_OUTPUT.PUT_LINE('JOB : '||V_JOB_TITLE||' EMPLOYEE NAME :'||V_FIRSTNAME);
+END LOOP;
+CLOSE CUR_FIRST_DAY;
+EXCEPTION
+WHEN NO_DATA_FOUND THEN --INVALID_CURSOR
+DBMS_OUTPUT.PUT_LINE('NO ONE HAVE FIRST DAY TODAY!!!');
+*/
 
 
-open cur_first_day;
 
-if cur_first_day%notfound then
-dbms_output.put_line('No one have First Day TODAY!!!');
-else 
-loop
-fetch cur_first_day into v_job_title,v_firstname;
-exit when cur_first_day%NOTFOUND;
-dbms_output.put_line('JOB : '||v_job_title||' Employee Name :'||v_firstname);
-end loop;
-end if;
+/*
+SELECT * FROM NJCT_A_EMPLOYEES;
+UPDATE NJCT_A_EMPLOYEES SET HIRE_DATE = '19-12-20' WHERE EMPLOYEE_ID =117;
 
-close cur_first_day;
 
-exception
-when INVALID_CURSOR then --INVALID_CURSOR
-dbms_output.put_line('INVALID CURSOR CHECK AGAIN!!');
+OPEN CUR_FIRST_DAY;
+
+IF CUR_FIRST_DAY%NOTFOUND THEN
+DBMS_OUTPUT.PUT_LINE('NO ONE HAVE FIRST DAY TODAY!!!');
+ELSE 
+LOOP
+FETCH CUR_FIRST_DAY INTO V_JOB_TITLE,V_FIRSTNAME;
+EXIT WHEN CUR_FIRST_DAY%NOTFOUND;
+DBMS_OUTPUT.PUT_LINE('JOB : '||V_JOB_TITLE||' EMPLOYEE NAME :'||V_FIRSTNAME);
+END LOOP;
+END IF;
+
+CLOSE CUR_FIRST_DAY;
+
+EXCEPTION
+WHEN INVALID_CURSOR THEN --INVALID_CURSOR
+DBMS_OUTPUT.PUT_LINE('INVALID CURSOR CHECK AGAIN!!');
 
 */
 
-5) Ensure no changes can be made to EMPLOYEES table before 6am and after 10pm in a day.
+5) ENSURE NO CHANGES CAN BE MADE TO EMPLOYEES TABLE BEFORE 6AM AND AFTER 10PM IN A DAY.
 
 SELECT TO_CHAR(CURRENT_DATE, 'HH24') FROM DUAL; 
 /*
-CREATE OR REPLACE TRIGGER trg_sunday
-BEFORE INSERT ON employee
+CREATE OR REPLACE TRIGGER TRG_SUNDAY
+BEFORE INSERT ON EMPLOYEE
 REFERENCING NEW AS NEW OLD AS OLD
 FOR EACH ROW
 BEGIN
-    IF TO_CHAR(SYSDATE, 'D') = '1' THEN   ---Should be 1 rather than 7
-        RAISE_APPLICATION_ERROR(-20000, 'Cannot insert record on sunday'); 
+    IF TO_CHAR(SYSDATE, 'D') = '1' THEN   ---SHOULD BE 1 RATHER THAN 7
+        RAISE_APPLICATION_ERROR(-20000, 'CANNOT INSERT RECORD ON SUNDAY'); 
     END IF;
 END;
 
-for sunday
+FOR SUNDAY
 */
 
-create or replace trigger no_change_on_njct_a_employees
-before insert or update or delete on njct_a_employees
-for each row
-declare
-v_time number;
-begin
+CREATE OR REPLACE TRIGGER NO_CHANGE_ON_NJCT_A_EMPLOYEES
+BEFORE INSERT OR UPDATE OR DELETE ON NJCT_A_EMPLOYEES
+FOR EACH ROW
+DECLARE
+V_TIME NUMBER;
+BEGIN
 
-select TO_CHAR(CURRENT_DATE, 'HH24') into v_time from dual;
+SELECT TO_CHAR(CURRENT_DATE, 'HH24') INTO V_TIME FROM DUAL;
 
-if (v_time > 6 AND v_time < 22) then
+IF (V_TIME > 6 AND V_TIME < 22) THEN
 RAISE_APPLICATION_ERROR(-20101, 'DML ALLOW BETWEEN 6AM AND 10PM');
-else
-dbms_output.put_line('DML DONE SUCCESSFULLY!');
-end if;
+ELSE
+DBMS_OUTPUT.PUT_LINE('DML DONE SUCCESSFULLY!');
+END IF;
 
-end;
+END;
 
 /*
-create or replace trigger no_change_on_njct_a_employees
-before insert or update or delete on njct_a_employees
-for each row
-declare
-v_time number;
-e_time exception;
-begin
+CREATE OR REPLACE TRIGGER NO_CHANGE_ON_NJCT_A_EMPLOYEES
+BEFORE INSERT OR UPDATE OR DELETE ON NJCT_A_EMPLOYEES
+FOR EACH ROW
+DECLARE
+V_TIME NUMBER;
+E_TIME EXCEPTION;
+BEGIN
 
-select TO_CHAR(CURRENT_DATE, 'HH24') into v_time from dual;
+SELECT TO_CHAR(CURRENT_DATE, 'HH24') INTO V_TIME FROM DUAL;
 
-if (v_time > 6 AND v_time < 22) then
-raise e_time;
-else
-dbms_output.put_line('DML is allow this time!!!!');
-end if;
+IF (V_TIME > 6 AND V_TIME < 22) THEN
+RAISE E_TIME;
+ELSE
+DBMS_OUTPUT.PUT_LINE('DML IS ALLOW THIS TIME!!!!');
+END IF;
 
 EXCEPTION
-when e_time then
-dbms_output.put_line('DML is not allow this time!!!!');
+WHEN E_TIME THEN
+DBMS_OUTPUT.PUT_LINE('DML IS NOT ALLOW THIS TIME!!!!');
 
-end;
+END;
 
 */
 
 
-6) Whenever the job is changed for an employee write the following details into job history.
-Employee ID, old job ID, old department ID, hire date of the employee for start date, system
-date for end date. But if a row is already present for employee job history then the start date
-should be the end date of that row +1.
+6) WHENEVER THE JOB IS CHANGED FOR AN EMPLOYEE WRITE THE FOLLOWING DETAILS INTO JOB HISTORY.
+EMPLOYEE ID, OLD JOB ID, OLD DEPARTMENT ID, HIRE DATE OF THE EMPLOYEE FOR START DATE, SYSTEM
+DATE FOR END DATE. BUT IF A ROW IS ALREADY PRESENT FOR EMPLOYEE JOB HISTORY THEN THE START DATE
+SHOULD BE THE END DATE OF THAT ROW +1.
 
-create or replace trigger TRIGGER_NJCT_A_JOB_HISTORY
-after update of job_id
-on njct_a_employees
-for each row
-declare
-cursor curtrial
-is
-select max(end_date) from NJCT_A_JOB_HISTORY where employee_id=:old.employee_id;
+CREATE OR REPLACE TRIGGER TRIGGER_NJCT_A_JOB_HISTORY
+AFTER UPDATE OF JOB_ID
+ON NJCT_A_EMPLOYEES
+FOR EACH ROW
+DECLARE
+CURSOR CURTRIAL
+IS
+SELECT MAX(END_DATE) FROM NJCT_A_JOB_HISTORY WHERE EMPLOYEE_ID=:OLD.EMPLOYEE_ID;
 
-v_count number;
-v_date date;
+V_COUNT NUMBER;
+V_DATE DATE;
 
-begin
+BEGIN
 
-select count(employee_id) into v_count from NJCT_A_JOB_HISTORY where employee_id = :old.employee_id;
+SELECT COUNT(EMPLOYEE_ID) INTO V_COUNT FROM NJCT_A_JOB_HISTORY WHERE EMPLOYEE_ID = :OLD.EMPLOYEE_ID;
 
-if (v_count > 0) then
-open curtrial;
-fetch curtrial into v_date;
+IF (V_COUNT > 0) THEN
+OPEN CURTRIAL;
+FETCH CURTRIAL INTO V_DATE;
 
-insert into njct_a_job_history 
-values (:old.employee_id,v_date + 1,sysdate,:old.job_id,:old.department_id);
+INSERT INTO NJCT_A_JOB_HISTORY 
+VALUES (:OLD.EMPLOYEE_ID,V_DATE + 1,SYSDATE,:OLD.JOB_ID,:OLD.DEPARTMENT_ID);
 
-close curtrial;
-dbms_output.put_line('if');
+CLOSE CURTRIAL;
+DBMS_OUTPUT.PUT_LINE('IF');
 
-else
-insert into njct_a_job_history 
-values (:old.employee_id,:old.hire_date,sysdate,:old.job_id,:old.department_id);
+ELSE
+INSERT INTO NJCT_A_JOB_HISTORY 
+VALUES (:OLD.EMPLOYEE_ID,:OLD.HIRE_DATE,SYSDATE,:OLD.JOB_ID,:OLD.DEPARTMENT_ID);
 
-dbms_output.put_line('else');
-end if;
+DBMS_OUTPUT.PUT_LINE('ELSE');
+END IF;
 
-end;
+END;
 /*
-create or replace trigger trigger_job_history
-after update of job_id
-on njct_a_employees
-for each row
-begin
+CREATE OR REPLACE TRIGGER TRIGGER_JOB_HISTORY
+AFTER UPDATE OF JOB_ID
+ON NJCT_A_EMPLOYEES
+FOR EACH ROW
+BEGIN
 
-insert into njct_a_job_history 
-values (:old.employee_id,:old.hire_date,sysdate,:old.job_id,:old.department_id);
+INSERT INTO NJCT_A_JOB_HISTORY 
+VALUES (:OLD.EMPLOYEE_ID,:OLD.HIRE_DATE,SYSDATE,:OLD.JOB_ID,:OLD.DEPARTMENT_ID);
 
-end;
+END;
 
-if(employee_id is there in njct_a_job_history) then
-start_date = end_date + 1;
-end_date = sysdate;
-else
-insert into njct_a_job_history 
-values (:old.employee_id,:old.hire_date,sysdate,:old.job_id,:old.department_id);
-end i0f;
+IF(EMPLOYEE_ID IS THERE IN NJCT_A_JOB_HISTORY) THEN
+START_DATE = END_DATE + 1;
+END_DATE = SYSDATE;
+ELSE
+INSERT INTO NJCT_A_JOB_HISTORY 
+VALUES (:OLD.EMPLOYEE_ID,:OLD.HIRE_DATE,SYSDATE,:OLD.JOB_ID,:OLD.DEPARTMENT_ID);
+END I0F;
 */
 /*0000000000000000000*/
-create or replace trigger trigger_job_history
-after update of job_id
-on njct_a_employees
-for each row
-declare
-v_count number;
-v_date date;--v_employee_id njct_a_job_history.employee_id%TYPE;
-cursor curtrial(v_employee_id number) IS 
-select end_date from (select end_date from njct_a_job_history where employee_id = v_employee_id order by end_date desc) where rownum = 1;
-begin
+CREATE OR REPLACE TRIGGER TRIGGER_JOB_HISTORY
+AFTER UPDATE OF JOB_ID
+ON NJCT_A_EMPLOYEES
+FOR EACH ROW
+DECLARE
+V_COUNT NUMBER;
+V_DATE DATE;--V_EMPLOYEE_ID NJCT_A_JOB_HISTORY.EMPLOYEE_ID%TYPE;
+CURSOR CURTRIAL(V_EMPLOYEE_ID NUMBER) IS 
+SELECT END_DATE FROM (SELECT END_DATE FROM NJCT_A_JOB_HISTORY WHERE EMPLOYEE_ID = V_EMPLOYEE_ID ORDER BY END_DATE DESC) WHERE ROWNUM = 1;
+BEGIN
 
-select count(employee_id) into v_count from njct_a_job_histroy where employee_id = :old.employee_id;
+SELECT COUNT(EMPLOYEE_ID) INTO V_COUNT FROM NJCT_A_JOB_HISTROY WHERE EMPLOYEE_ID = :OLD.EMPLOYEE_ID;
 
-if (v_count = 0) then
-insert into njct_a_job_history 
-values (:old.employee_id,:old.hire_date,sysdate,:old.job_id,:old.department_id);
-else
---v_employee_id := :old.employee_id;
-open curtrial(:old.employee_id);
+IF (V_COUNT = 0) THEN
+INSERT INTO NJCT_A_JOB_HISTORY 
+VALUES (:OLD.EMPLOYEE_ID,:OLD.HIRE_DATE,SYSDATE,:OLD.JOB_ID,:OLD.DEPARTMENT_ID);
+ELSE
+--V_EMPLOYEE_ID := :OLD.EMPLOYEE_ID;
+OPEN CURTRIAL(:OLD.EMPLOYEE_ID);
 
-fetch curtrial into v_date;
+FETCH CURTRIAL INTO V_DATE;
 
-insert into njct_a_job_history 
-values (:old.employee_id,v_date + 1,sysdate,:old.job_id,:old.department_id);
+INSERT INTO NJCT_A_JOB_HISTORY 
+VALUES (:OLD.EMPLOYEE_ID,V_DATE + 1,SYSDATE,:OLD.JOB_ID,:OLD.DEPARTMENT_ID);
 
-close curtrial;
+CLOSE CURTRIAL;
 
-end if;
+END IF;
 
-end;
+END;
 /*0000000000000000000*/
 
 
@@ -710,103 +715,103 @@ end;
 
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-weekday(start_date,end_date);
+WEEKDAY(START_DATE,END_DATE);
 
-create or replace function fnx_week_day_trial(start_date date,last_date date)
-return number
-is
-begin
-if (start_date < last_date) then
+CREATE OR REPLACE FUNCTION FNX_WEEK_DAY_TRIAL(START_DATE DATE,LAST_DATE DATE)
+RETURN NUMBER
+IS
+BEGIN
+IF (START_DATE < LAST_DATE) THEN
 
-end if;
-end;
+END IF;
+END;
 /*
 
 COMPARING DATE GRATER AND SMALLER
 
-declare
-start_date date;
-last_date date;
-begin 
+DECLARE
+START_DATE DATE;
+LAST_DATE DATE;
+BEGIN 
 
-start_date := '18-03-01';
-last_date := '19-03-03';
+START_DATE := '18-03-01';
+LAST_DATE := '19-03-03';
 
-if (start_date < last_date) then
-dbms_output.put_line('wrong');
-else
-dbms_output.put_line('right');
-end if;
+IF (START_DATE < LAST_DATE) THEN
+DBMS_OUTPUT.PUT_LINE('WRONG');
+ELSE
+DBMS_OUTPUT.PUT_LINE('RIGHT');
+END IF;
 
-end;
+END;
 */
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 -- PROCEDURE THAT GIVES DATE DIFFERENCE OF WEEKDAYS
-declare 
-start_date date;
-last_date date;
-v_date date;
-v_count number;
-begin
-start_date := '10-02-21';
-last_date := '10-03-21';
-if (start_date < last_date) then
+DECLARE 
+START_DATE DATE;
+LAST_DATE DATE;
+V_DATE DATE;
+V_COUNT NUMBER;
+BEGIN
+START_DATE := '10-02-21';
+LAST_DATE := '10-03-21';
+IF (START_DATE < LAST_DATE) THEN
 
-v_date := start_date;
-v_count := 0;
+V_DATE := START_DATE;
+V_COUNT := 0;
 
-loop
+LOOP
 
-if(TO_CHAR(v_date,'D') != 1) then
-v_count := v_count + 1;
-end if;
-v_date := (v_date + 1);
-exit when v_date = last_date;
+IF(TO_CHAR(V_DATE,'D') != 1) THEN
+V_COUNT := V_COUNT + 1;
+END IF;
+V_DATE := (V_DATE + 1);
+EXIT WHEN V_DATE = LAST_DATE;
 
-end loop;
-dbms_output.put_line('No. of WEEK DAYS : '|| v_count);
-else
-dbms_output.put_line('Check the Dates Again!!!!');
-end if;
-end;
+END LOOP;
+DBMS_OUTPUT.PUT_LINE('NO. OF WEEK DAYS : '|| V_COUNT);
+ELSE
+DBMS_OUTPUT.PUT_LINE('CHECK THE DATES AGAIN!!!!');
+END IF;
+END;
 -- FUNCTION OF ABOVE
 
 /*
 SELECT ( SYSDATE + 21 ) FROM DUAL;
 */
-create or replace function fnx_week_day_trial(start_date date,last_date date)
-return number
-is
+CREATE OR REPLACE FUNCTION FNX_WEEK_DAY_TRIAL(START_DATE DATE,LAST_DATE DATE)
+RETURN NUMBER
+IS
 
-v_date date;
-v_count number;
+V_DATE DATE;
+V_COUNT NUMBER;
 
-begin
+BEGIN
 
-if (start_date < last_date) then
+IF (START_DATE < LAST_DATE) THEN
 
-v_date := start_date;
-v_count := 0;
+V_DATE := START_DATE;
+V_COUNT := 0;
 
-loop
+LOOP
 
-if(TO_CHAR(v_date,'D') != 1) then
-v_count := v_count + 1;
-end if;
-v_date := (v_date + 1);
-exit when v_date = last_date;
+IF(TO_CHAR(V_DATE,'D') != 1) THEN
+V_COUNT := V_COUNT + 1;
+END IF;
+V_DATE := (V_DATE + 1);
+EXIT WHEN V_DATE = LAST_DATE;
 
-end loop;
-RETURN v_count;
-else
+END LOOP;
+RETURN V_COUNT;
+ELSE
 RETURN -1;
-end if;
+END IF;
 
-end;
+END;
 
-SELECT fnx_week_day_trial('10-02-21','10-03-21') FROM DUAL;
+SELECT FNX_WEEK_DAY_TRIAL('10-02-21','10-03-21') FROM DUAL;
 
 
 
---select * from dictionary where TABLE_NAME like '%TRIGG%';
--- SELECT * from USER_TRIGGERS where TABLE_NAME like'';
+--SELECT * FROM DICTIONARY WHERE TABLE_NAME LIKE '%TRIGG%';
+-- SELECT * FROM USER_TRIGGERS WHERE TABLE_NAME LIKE'';
