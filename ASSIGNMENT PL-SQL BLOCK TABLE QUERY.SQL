@@ -471,3 +471,149 @@ THAT'S ALL FOR TABLE (*.*)-> :)
 */
 
 --WE'LL INSERT JOB_HISTORY RECORDS LATER
+table NJCT_A_REGIONS created.
+table NJCT_A_COUNTRIES created.
+table NJCT_A_LOCATIONS created.
+table NJCT_A_DEPARTMENTS created.
+table NJCT_A_JOBS created.
+table NJCT_A_EMPLOYEES created.
+table NJCT_A_JOB_HISTORY created.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+Error starting at line : 122 in command -
+INSERT INTO NJCT_A_EMPLOYEES VALUES(91,'NIRAV','DESAI','NIRAV@GMAIL.COM',987654,'19-MAR-16',019,16000,1.1,NULL,501)
+Error report -
+SQL Error: ORA-02291: integrity constraint (MFTRAN.SYS_C001304419) violated - parent key not found
+02291. 00000 - "integrity constraint (%s.%s) violated - parent key not found"
+*Cause:    A foreign key value has no matching primary key value.
+*Action:   Delete the foreign key or add a matching primary key.
+
+Error starting at line : 123 in command -
+INSERT INTO NJCT_A_EMPLOYEES VALUES(92,'JAMES','MACROS','MACROS@GMAIL.COM',987654,'19-MAR-19',023,18600,NULL,NULL,502)
+Error report -
+SQL Error: ORA-02291: integrity constraint (MFTRAN.SYS_C001304419) violated - parent key not found
+02291. 00000 - "integrity constraint (%s.%s) violated - parent key not found"
+*Cause:    A foreign key value has no matching primary key value.
+*Action:   Delete the foreign key or add a matching primary key.
+
+Error starting at line : 124 in command -
+INSERT INTO NJCT_A_EMPLOYEES VALUES(93,'MARY','WATSON','MARY@GMAIL.COM',123456,'23-JAN-21',023,22500,NULL,NULL,601)
+Error report -
+SQL Error: ORA-02291: integrity constraint (MFTRAN.SYS_C001304419) violated - parent key not found
+02291. 00000 - "integrity constraint (%s.%s) violated - parent key not found"
+*Cause:    A foreign key value has no matching primary key value.
+*Action:   Delete the foreign key or add a matching primary key.
+
+Error starting at line : 125 in command -
+INSERT INTO NJCT_A_EMPLOYEES VALUES(94,'JAYAN','JYOT','JJYOT@GMAIL.COM',234567,'29-JAN-21',025,25500,2.2,NULL,602)
+Error report -
+SQL Error: ORA-02291: integrity constraint (MFTRAN.SYS_C001304419) violated - parent key not found
+02291. 00000 - "integrity constraint (%s.%s) violated - parent key not found"
+*Cause:    A foreign key value has no matching primary key value.
+*Action:   Delete the foreign key or add a matching primary key.
+
+Error starting at line : 126 in command -
+INSERT INTO NJCT_A_EMPLOYEES VALUES(95,'PARTH','SAVALIYA','PARTH@GMAIL.COM',564615,'20-DEC-19',027,29000,5.2,NULL,701)
+Error report -
+SQL Error: ORA-02291: integrity constraint (MFTRAN.SYS_C001304419) violated - parent key not found
+02291. 00000 - "integrity constraint (%s.%s) violated - parent key not found"
+*Cause:    A foreign key value has no matching primary key value.
+*Action:   Delete the foreign key or add a matching primary key.
+
+Error starting at line : 127 in command -
+INSERT INTO NJCT_A_EMPLOYEES VALUES(96,'MIRAL','PATEL','MIRAL@GMAIL.COM',153486,'21-JUL-12',029,32500,5.3,NULL,702)
+Error report -
+SQL Error: ORA-02291: integrity constraint (MFTRAN.SYS_C001304419) violated - parent key not found
+02291. 00000 - "integrity constraint (%s.%s) violated - parent key not found"
+*Cause:    A foreign key value has no matching primary key value.
+*Action:   Delete the foreign key or add a matching primary key.
+
+Error starting at line : 128 in command -
+INSERT INTO NJCT_A_EMPLOYEES VALUES(97,'MANSI','GOHEL','GOHEL@GMAIL.COM',136844,'23-JUN-15',031,36500,6.1,NULL,801)
+Error report -
+SQL Error: ORA-02291: integrity constraint (MFTRAN.SYS_C001304419) violated - parent key not found
+02291. 00000 - "integrity constraint (%s.%s) violated - parent key not found"
+*Cause:    A foreign key value has no matching primary key value.
+*Action:   Delete the foreign key or add a matching primary key.
+
+Error starting at line : 129 in command -
+INSERT INTO NJCT_A_EMPLOYEES VALUES(98,'PRASHANT','SHESHPURE','PRASHANT@GMAIL.COM',857894,'25-MAY-15',033,43500,8.1,NULL,802)
+Error report -
+SQL Error: ORA-02291: integrity constraint (MFTRAN.SYS_C001304419) violated - parent key not found
+02291. 00000 - "integrity constraint (%s.%s) violated - parent key not found"
+*Cause:    A foreign key value has no matching primary key value.
+*Action:   Delete the foreign key or add a matching primary key.
+Error starting at line : 130 in command -
+INSERT INTO NJCT_A_EMPLOYEES VALUES(99,'ANKIT','PATEL','ANKIT@GMAIL.COM',574124,'30-APR-15',034,9000,3.5,NULL,901)
+Error report -
+SQL Error: ORA-02291: integrity constraint (MFTRAN.SYS_C001304419) violated - parent key not found
+02291. 00000 - "integrity constraint (%s.%s) violated - parent key not found"
+*Cause:    A foreign key value has no matching primary key value.
+*Action:   Delete the foreign key or add a matching primary key.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+1 rows inserted.
+table NJCT_A_DEPARTMENTS altered.
