@@ -1,0 +1,14 @@
+Host
+ec2-54-157-160-218.compute-1.amazonaws.com
+Database
+d8m3ntka0ll6th
+User
+dgtavyqtckuzev
+Port
+5432
+Password
+c439e67d11c20a0414145d674678bb2a620dee55ad028f4f3a6b9501ef1bbccb
+URI
+postgres://dgtavyqtckuzev:c439e67d11c20a0414145d674678bb2a620dee55ad028f4f3a6b9501ef1bbccb@ec2-54-157-160-218.compute-1.amazonaws.com:5432/d8m3ntka0ll6th
+Heroku CLI
+heroku pg:psql postgresql-contoured-62217 --app tryingpostgres
